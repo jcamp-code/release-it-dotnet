@@ -1,7 +1,7 @@
 {
   "name": "release-it-dotnet",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "NuGet publish and DotNet version read/write plugin for release-it",
   "author": "John Campion Jr (https://github.com/JohnCampionJr/)",
   "license": "MIT",
@@ -66,6 +66,7 @@
     "eslint": "8.52.0",
     "prettier": "3.0.3",
     "release-it": "16.2.1",
+    "release-it-changelogen": "^0.0.4",
     "sinon": "^17.0.0",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",

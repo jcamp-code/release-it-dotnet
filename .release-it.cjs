@@ -1,18 +1,15 @@
 /* eslint-disable no-template-curly-in-string */
 // https://github.com/release-it/release-it/blob/main/config/release-it.json
 module.exports = {
-  // plugins: {
-  //   './dist/index.mjs': {
-  //     keepArtifacts: true,
-  //     publish: true,
-  //     csprojFile: './src/ClassLibrary1/ClassLibrary1.csproj',
-  //     extraFiles: ['./Directory.Build.props'],
-  //   },
-  // },
+  plugins: {
+    'release-it-changelogen': {
+      excludeAuthors: ['John Campion'],
+    },
+  },
   git: {
-    commit: false,
-    tag: false,
-    push: false,
+    commit: true,
+    tag: true,
+    push: true,
     requireCleanWorkingDir: false,
     tagName: 'v${version}',
     commitMessage: 'chore(release): v${version}',
@@ -20,7 +17,7 @@ module.exports = {
   },
   github: {
     releaseName: 'v${version}',
-    release: false,
+    release: true,
     web: true,
   },
   npm: {
