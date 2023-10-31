@@ -1,5 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>unjs/renovate-config"],
-  "ignorePaths": ["**/node_modules/**", ".playground"]
+  "ignorePaths": ["**/node_modules/**", ".playground", "test"]
 }

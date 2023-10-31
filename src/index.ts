@@ -6,6 +6,8 @@ import { basename, resolve } from 'pathe'
 import { Plugin } from 'release-it'
 import shelljs from 'shelljs'
 
+import 'dotenv/config'
+
 import {
   knownDotNetFiles,
   processExtraFiles,
