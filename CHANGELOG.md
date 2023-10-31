@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.0.3
+
+[compare changes](https://github.com/jcamp-code/release-it-dotnet/compare/v0.0.2...v0.0.3)
+
+### 🩹 Fixes
+
+- Dotenv not loaded ([1aa802e](https://github.com/jcamp-code/release-it-dotnet/commit/1aa802e))
+
 ## v0.0.2
 
 [compare changes](https://github.com/jcamp-code/release-it-dotnet/compare/v0.0.1...v0.0.2)
