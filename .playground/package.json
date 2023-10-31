@@ -1,0 +1,41 @@
+{
+  "name": "@jcamp/release-it-test-playground",
+  "version": "2.9.39",
+  "private": true,
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "repository": "https://github.com/JohnCampionJr/release-it-test",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./dotnet": {
+      "types": "./dist/dotnet.d.ts",
+      "import": "./dist/dotnet.mjs",
+      "require": "./dist/dotnet.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "test": "vitest run",
+    "release": "release-it",
+    "pre": "release-it minor --preRelease=beta",
+    "cl": "changelogen"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "release-it": "^16.2.1"
+  }
+}

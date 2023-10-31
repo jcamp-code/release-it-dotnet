@@ -1,0 +1,75 @@
+{
+  "name": "release-it-dotnet",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "NuGet publish and DotNet version read/write plugin for release-it",
+  "author": "John Campion Jr (https://github.com/JohnCampionJr/)",
+  "license": "MIT",
+  "repository": "https://github.com/jcamp-code/release-it-dotnet",
+  "keywords": [
+    "release",
+    "release-it",
+    "release-it-plugin",
+    "version",
+    "bump",
+    "dotnet"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "bin": {
+    "release-it-dotnet": "./dist/bin/release-it-dotnet.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "test": "vitest run",
+    "release": "unbuild & release-it",
+    "pre": "release-it minor --preRelease=beta",
+    "cl": "changelogen"
+  },
+  "peerDependencies": {
+    "changelogen": "^0.5.5",
+    "release-it": "^16.2.1",
+    "semver": "^7.5.4"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.10",
+    "chalk": "^5.3.0",
+    "changelogen": "^0.5.5",
+    "defu": "^6.1.3",
+    "detect-indent": "^7.0.1",
+    "dotenv": "^16.3.1",
+    "execa": "^8.0.1",
+    "globby": "^13.2.2",
+    "js-yaml": "^4.1.0",
+    "jsonpath": "1.1.1",
+    "pathe": "^1.1.1",
+    "release-it": "^16.2.1",
+    "release-it-changelogen": "^0.0.1",
+    "semver": "^7.5.4",
+    "shelljs": "^0.8.5",
+    "xpath": "^0.0.33",
+    "yargs-parser": "^21.1.1"
+  },
+  "devDependencies": {
+    "@jcamp/eslint-config": "^1.0.4",
+    "@types/node": "^20.8.9",
+    "@types/semver": "^7.5.4",
+    "changelogen": "0.5.5",
+    "eslint": "8.52.0",
+    "prettier": "3.0.3",
+    "release-it": "16.2.1",
+    "sinon": "^17.0.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^0.34.6"
+  }
+}

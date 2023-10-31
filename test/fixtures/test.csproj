@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <PackageTags>$(PackageBaseTags)</PackageTags>
+    <AssemblyName>MyAssembly</AssemblyName>
+    <Title>Package Title</Title>
+    <PackageTags>$(PackageBaseTags)</PackageTags>
+    <Authors>John Campion Jr</Authors>
+    <Version>2.9.7</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoFramework" Version="0.29.0"/>
+    <PackageReference Include="Finbuckle.MultiTenant" Version="6.11.1"/>
+  </ItemGroup>
+</Project>

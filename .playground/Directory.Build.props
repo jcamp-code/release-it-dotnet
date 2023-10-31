@@ -1,0 +1,32 @@
+<Project>
+
+  <PropertyGroup>
+    <RootNamespace>MongoFramework.AspNetCore.Identity</RootNamespace>
+    <PackageId>$(AssemblyName)</PackageId>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/JohnCampionJr/MongoFramework.AspNetCore.Identity</PackageProjectUrl>
+    <PackageBaseTags>mongodb;mongoframework;mongo;identity</PackageBaseTags>
+
+    <RepositoryUrl>https://github.com/jcamp-code/release-it</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>main</RepositoryBranch>
+
+    <!-- SourceLink Support -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <LangVersion>Latest</LangVersion>
+    <Version>2.9.39</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" Visible="false" PackagePath=""/>
+    <None Include="..\..\README.md" Pack="true" Visible="false" PackagePath=""/>
+  </ItemGroup>
+
+</Project>
