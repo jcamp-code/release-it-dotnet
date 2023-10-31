@@ -42,8 +42,8 @@ dependencies:
     specifier: ^16.2.1
     version: 16.2.1(typescript@5.2.2)
   release-it-changelogen:
-    specifier: ^0.0.1
-    version: 0.0.1(changelogen@0.5.5)(release-it@16.2.1)(semver@7.5.4)
+    specifier: ^0.0.4
+    version: 0.0.4(changelogen@0.5.5)(release-it@16.2.1)(semver@7.5.4)
   semver:
     specifier: ^7.5.4
     version: 7.5.4
@@ -4987,8 +4987,8 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /release-it-changelogen@0.0.1(changelogen@0.5.5)(release-it@16.2.1)(semver@7.5.4):
-    resolution: {integrity: sha512-bBFqy2NeiNbZ+UICUFLlCNy2QrleP6p5juyMPzNv9UVDw+QJDPDQ0PPy2QFa31SQAKtQEPgiZ6kBlg9elZ0/2w==}
+  /release-it-changelogen@0.0.4(changelogen@0.5.5)(release-it@16.2.1)(semver@7.5.4):
+    resolution: {integrity: sha512-zHbXrAfSv1UT87/TInuouheK7S3joMG7lh48+cwzqT/g0FaYpDWQE0cV7CNao7RQCWAPANbVvkasKTxRQ88iFw==}
     hasBin: true
     peerDependencies:
       changelogen: ^0.5.5
