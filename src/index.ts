@@ -4,6 +4,7 @@ import { defu } from 'defu'
 import { globby } from 'globby'
 import { basename, resolve } from 'pathe'
 import { Plugin } from 'release-it'
+import { rimraf } from 'rimraf'
 import shelljs from 'shelljs'
 
 import 'dotenv/config'
@@ -286,7 +287,7 @@ class DotNetPlugin extends Plugin {
   async dotnetCleanUp() {
     await this.dotnetRemoveSource()
     if (!this.context.keepArtifacts) {
-      await this.exec('rm -rf ./artifacts')
+      await rimraf('./artifacts')
       this.log.log('🗑️ Cleaned up')
     } else {
       const artifacts = await globby(resolve(cwd(), './artifacts/*'))
