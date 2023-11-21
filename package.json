@@ -36,7 +36,7 @@
   },
   "peerDependencies": {
     "changelogen": "^0.5.5",
-    "release-it": "^16.2.1",
+    "release-it": "^17.0.0",
     "semver": "^7.5.4"
   },
   "dependencies": {
@@ -51,7 +51,7 @@
     "js-yaml": "^4.1.0",
     "jsonpath": "1.1.1",
     "pathe": "^1.1.1",
-    "release-it": "^16.2.1",
+    "release-it": "^17.0.0",
     "release-it-changelogen": "^0.0.4",
     "rimraf": "^5.0.5",
     "semver": "^7.5.4",
