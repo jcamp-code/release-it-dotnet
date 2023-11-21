@@ -22,6 +22,8 @@ In [release-it](https://github.com/release-it/release-it) config:
 plugins: {
   'release-it-dotnet': {
     csprojFile: './src/Test.csproj'
+    // or
+    versionFile: './src/Directory.Build.props'
   },
 }
 ```
@@ -30,7 +32,11 @@ plugins: {
 
 #### `csprojFile?: string`
 
-Required: This is the csproj file to pack and publish, and store and set the version in.
+Required if `versionFile` not set: This is the csproj file to pack and publish, and store and set the version in. Can also be the solution file if you're publishing multiple packages.
+
+#### `versionFile?: string | false`
+
+Required if `csprojFile` not set. If you want to store and set the version in a different file, set it here. Supports `.csproj` and `Directory.Build.props` files
 
 #### `nugetFeedUrl?: string`
 
@@ -42,11 +48,7 @@ You can set the NuGet API key, or by using a `NUGET_API_KEY` environment variabl
 
 #### `packageId?: string`
 
-Override the package ID. Defaults to the package ID in the referenced .csproj file, or the .csproj file name if none.
-
-#### `versionFile?: string | false`
-
-If you want to store and set the version in a different file, set it here. Supports `.csproj` and `Directory.Build.props` files
+Override the package ID. Defaults to the package ID in the referenced .csproj file, or the .csproj file name if none. Only used for displaying package name in prompts
 
 #### `publish: boolean`
 

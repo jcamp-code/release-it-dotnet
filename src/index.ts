@@ -93,13 +93,14 @@ class DotNetPlugin extends Plugin {
     if (this.context.pack || this.context.publish) {
       const dotnetExecutable = shelljs.which('dotnet')
       if (!dotnetExecutable) throw new Error('dotnet executable not found')
-      if (!this.context.csprojFile) throw new Error('csprojFile is required')
+      if (!this.context.csprojFile && !this.context.versionFile)
+        throw new Error('versionFile or csprojFile is required')
 
       if (this.context.publish) {
         if (!this.context.nugetApiKey)
-          throw new Error('nugetApiKey is required')
+          throw new Error('nugetApiKey is required if publishing is enabled')
         if (!this.context.nugetFeedUrl)
-          throw new Error('nugetFeedUrl is required')
+          throw new Error('nugetFeedUrl is required if publishing is enabled')
       }
     }
   }
@@ -148,8 +149,6 @@ class DotNetPlugin extends Plugin {
   async release() {
     const { publish, pack } = this.context
 
-    //console.log('release', this.context)
-
     if (!pack && !publish) return
 
     try {
@@ -182,19 +181,24 @@ class DotNetPlugin extends Plugin {
   // Internal DotNet / Nuget Utils
 
   async getPackageId() {
-    const { csprojFile } = this.context
-    const file = resolve(cwd(), csprojFile)
-    const csprojFileContents = await fsp.readFile(file, 'utf8')
-    const match = csprojFileContents.match(/<PackageId>(.*)<\/PackageId>/)
-    const packageIdExists = match && match.length > 1
-    const packageId = packageIdExists
-      ? match[1]
-      : basename(csprojFile).replace('.csproj', '')
+    let packageId = this.context.packageId
+
+    if (!packageId) {
+      const { csprojFile } = this.context
+      const file = resolve(cwd(), csprojFile)
+      const csprojFileContents = await fsp.readFile(file, 'utf8')
+      const match = csprojFileContents.match(/<PackageId>(.*)<\/PackageId>/)
+      const packageIdExists = match && match.length > 1
+      packageId = packageIdExists
+        ? match[1]
+        : basename(csprojFile).replace('.csproj', '')
+      this.context.packageId = packageId
+    }
+
     this.config.setContext({
       packageId,
       nugetFeedUrl: this.context.nugetFeedUrl,
     })
-    this.context.packageId = packageId
   }
 
   async dotnetAddSource() {
@@ -225,9 +229,9 @@ class DotNetPlugin extends Plugin {
   }
 
   async dotnetPack() {
-    const { csprojFile, bumpedVersion, buildConfiguration } = this.context
+    const { csprojFile, buildConfiguration, packageId } = this.context
 
-    this.log.log(`🚧 Packing ${csprojFile}...`)
+    this.log.log(`🚧 Packing ${csprojFile || packageId}...`)
 
     const command = [
       'dotnet',
@@ -237,7 +241,8 @@ class DotNetPlugin extends Plugin {
       buildConfiguration,
       '--output',
       './artifacts',
-      `-p:PackageVersion=${bumpedVersion}`,
+      // this should be set in the version files instead
+      // `-p:PackageVersion=${bumpedVersion}`,
     ]
 
     this.log.verbose(`DotNetPlugin: Packing Command: ${command}`)
@@ -247,8 +252,7 @@ class DotNetPlugin extends Plugin {
 
   async dotnetPublish() {
     try {
-      const { bumpedVersion, nugetFeedUrl, nugetApiKey, packageId } =
-        this.context
+      const { nugetFeedUrl, nugetApiKey, packageId } = this.context
 
       this.log.log(`🚧 Publishing ${packageId}...`)
 
@@ -256,7 +260,9 @@ class DotNetPlugin extends Plugin {
         'dotnet',
         'nuget',
         'push',
-        `./artifacts/${packageId}.${bumpedVersion}.nupkg`,
+        // changed to publish all packages
+        `./artifacts/**.nupkg`,
+        // `./artifacts/${packageId}.${bumpedVersion}.nupkg`,
       ]
 
       command.push('-s')
