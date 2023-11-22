@@ -2,8 +2,8 @@ node_modules
 .env
 dist/
 .idea
-.playground/**/[Bb]in/
-.playground/**/[Oo]bj/
-.playground/artifacts/
+.playground*/**/[Bb]in/
+.playground*/**/[Oo]bj/
+.playground*/artifacts/
 test/**/[Bb]in/
 test/**/[Oo]bj/
