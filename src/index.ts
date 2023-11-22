@@ -86,7 +86,10 @@ class DotNetPlugin extends Plugin {
     if (this.context.publish) this.context.pack = true
 
     // set version file to csprojFile unless version is explicity set to false
-    if (this.context.versionFile === undefined)
+    if (
+      this.context.versionFile === undefined &&
+      this.context.csprojFile.endsWith('.csproj')
+    )
       this.context.versionFile = this.context.csprojFile
 
     // check the config and environment
@@ -95,6 +98,13 @@ class DotNetPlugin extends Plugin {
       if (!dotnetExecutable) throw new Error('dotnet executable not found')
       if (!this.context.csprojFile && !this.context.versionFile)
         throw new Error('versionFile or csprojFile is required')
+
+      if (
+        this.context.csprojFile &&
+        !this.context.versionFile &&
+        this.context.csprojFile.endsWith('.sln')
+      )
+        throw new Error('versionFile required if csprojFile is a solution file')
 
       if (this.context.publish) {
         if (!this.context.nugetApiKey)
@@ -185,13 +195,17 @@ class DotNetPlugin extends Plugin {
 
     if (!packageId) {
       const { csprojFile } = this.context
-      const file = resolve(cwd(), csprojFile)
-      const csprojFileContents = await fsp.readFile(file, 'utf8')
-      const match = csprojFileContents.match(/<PackageId>(.*)<\/PackageId>/)
-      const packageIdExists = match && match.length > 1
-      packageId = packageIdExists
-        ? match[1]
-        : basename(csprojFile).replace('.csproj', '')
+      if (csprojFile.endsWith('.sln')) {
+        packageId = basename(csprojFile).replace('.sln', '')
+      } else {
+        const file = resolve(cwd(), csprojFile)
+        const csprojFileContents = await fsp.readFile(file, 'utf8')
+        const match = csprojFileContents.match(/<PackageId>(.*)<\/PackageId>/)
+        const packageIdExists = match && match.length > 1
+        packageId = packageIdExists
+          ? match[1]
+          : basename(csprojFile).replace('.csproj', '')
+      }
       this.context.packageId = packageId
     }
 
