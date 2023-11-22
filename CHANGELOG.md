@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.1.1
+
+[compare changes](https://github.com/jcamp-code/release-it-dotnet/compare/v0.1.0...v0.1.1)
+
+### 🚀 Enhancements
+
+- Add build command ([27d8bdf](https://github.com/jcamp-code/release-it-dotnet/commit/27d8bdf))
+
 ## v0.1.0
 
 [compare changes](https://github.com/jcamp-code/release-it-dotnet/compare/v0.0.3...v0.1.0)
