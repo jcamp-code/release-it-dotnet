@@ -31,6 +31,7 @@ export interface DotNetPluginOptions {
   packageId?: string
   csprojFile?: string
   versionFile?: string | false
+  build?: boolean
   pack: boolean
   publish: boolean
   buildConfiguration: string
@@ -52,12 +53,19 @@ const prompts = {
       return `Publish v${context.version} of ${context.packageId} to ${feed}?`
     },
   },
+  build: {
+    type: 'confirm',
+    message: () => {
+      return `Build latest version?`
+    },
+  },
 }
 
 const defaults: DotNetPluginContext = {
   nugetApiKey: env.NUGET_TOKEN || env.NUGET_API_KEY,
   nugetFeedUrl: DEFAULT_NUGET_FEED_URL,
   pack: false,
+  build: false,
   publish: true,
   buildConfiguration: 'Release',
   nugetSourceName: 'ReleaseItSource',
@@ -157,7 +165,14 @@ class DotNetPlugin extends Plugin {
   }
 
   async release() {
-    const { publish, pack } = this.context
+    const { publish, pack, build } = this.context
+
+    if (build)
+      await this.step({
+        task: () => this.dotnetBuild(),
+        label: 'Build with dotnet',
+        prompt: 'build',
+      })
 
     if (!pack && !publish) return
 
@@ -238,6 +253,24 @@ class DotNetPlugin extends Plugin {
     ]
 
     this.log.verbose(`DotNetPlugin: Add Source Command: ${command}`)
+
+    await this.exec(command)
+  }
+
+  async dotnetBuild() {
+    const { csprojFile, buildConfiguration } = this.context
+
+    this.log.log(`🚧 Building ${csprojFile || ''}...`)
+
+    const command = [
+      'dotnet',
+      'build',
+      `"${csprojFile}"`,
+      '--configuration',
+      buildConfiguration,
+    ]
+
+    this.log.verbose(`DotNetPlugin: Building Command: ${command}`)
 
     await this.exec(command)
   }
