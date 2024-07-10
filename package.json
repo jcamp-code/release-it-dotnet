@@ -53,7 +53,7 @@
     "pathe": "^1.1.1",
     "release-it": "^17.0.0",
     "release-it-changelogen": "^0.1.0",
-    "rimraf": "^5.0.5",
+    "rimraf": "^6.0.1",
     "semver": "^7.5.4",
     "shelljs": "^0.8.5",
     "xpath": "^0.0.33",
