@@ -50,7 +50,7 @@
     "globby": "^14.0.0",
     "js-yaml": "^4.1.0",
     "jsonpath": "1.1.1",
-    "pathe": "^1.1.1",
+    "pathe": "^2.0.3",
     "release-it": "^17.0.0",
     "release-it-changelogen": "^0.1.0",
     "rimraf": "^5.0.5",
